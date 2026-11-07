@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCOS CARE – Your Personal PCOS Health Companion</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS for Responsive Layouts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for Health Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#FFF9F5] text-[#2D3748] font-['Poppins'] flex flex-col min-h-screen">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-sm sticky top-z-50 z-50 px-6 py-4 flex justify-between items-center border-b border-[#F8DCE7]">
+        <div class="flex items-center space-x-2 text-[#C45B82]">
+            <i class="fa-solid fa-heart-pulse text-2xl"></i>
+            <span class="font-bold text-xl tracking-tight">PCOS CARE</span>
+        </div>
+        <nav class="hidden md:flex space-x-1 lg:space-x-3">
+            <button onclick="switchView('home')" class="nav-btn active px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Home</button>
+            <button onclick="switchView('dashboard')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Dashboard</button>
+            <button onclick="switchView('symptom-checker')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Symptom Checker</button>
+            <button onclick="switchView('period-tracker')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Period Tracker</button>
+            <button onclick="switchView('care-solutions')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Care & Solutions</button>
+            <button onclick="switchView('diet-planner')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Diet Planner</button>
+            <button onclick="switchView('exercise-guide')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Exercises</button>
+            <button onclick="switchView('quiz')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Quiz</button>
+            <button onclick="switchView('doctor-prep')" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition hover:bg-[#F8DCE7]">Doctor Prep</button>
+        </nav>
+        <div class="flex items-center space-x-4">
+            <span id="navUserGreeting" class="text-sm font-semibold text-[#C45B82] hidden"></span>
+            <button id="authTriggerBtn" onclick="openAuthModal('login')" class="bg-[#C45B82] text-white px-4 py-2 rounded-xl text-sm font-medium shadow hover:bg-[#a7466b] transition">Login / Register</button>
+        </div>
+    </header>
+
+    <!-- Main Container Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 1. HOME LANDING SECTION -->
+        <section id="view-home" class="app-view active-view">
+            <div class="bg-gradient-to-r from-[#F8DCE7] to-[#EAE4F5] rounded-3xl p-8 sm:p-12 mb-10 shadow-sm flex flex-col md:flex-row items-center justify-between">
+                <div class="max-w-xl mb-6 md:mb-0">
+                    <span class="bg-white/80 text-[#C45B82] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">BE Computer Science Project</span>
+                    <h1 class="text-3xl sm:text-5xl font-bold mt-3 mb-4 leading-tight">Understand Your Body.<br><span class="text-[#C45B82]">Take Control of Your Health.</span></h1>
+                    <p class="text-gray-700 mb-6 text-base sm:text-lg">A personalized healthcare companion platform offering cycle tracking, symptom assessment, Indian diet planning, and self-care guidance tailored for PCOS management.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="openAuthModal('register')" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition">Get Started Free</button>
+                        <button onclick="switchView('symptom-checker')" class="bg-white text-[#C45B82] border border-[#C45B82] px-6 py-3 rounded-xl font-medium hover:bg-pink-50 transition">Check Symptoms</button>
+                    </div>
+                </div>
+                <div class="text-[#C45B82] text-8xl sm:text-9xl opacity-30">
+                    <i class="fa-solid fa-spa"></i>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-xl bg-[#F8DCE7] text-[#C45B82] flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-calendar-heart"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Cycle & Symptom Tracking</h3>
+                    <p class="text-gray-600 text-sm">Log your menstrual cycle dates, calculate next period estimates, and track daily severity ratings with charts.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-xl bg-[#EAE4F5] text-[#C45B82] flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-bowl-rice"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Indian PCOS Diet Planner</h3>
+                    <p class="text-gray-600 text-sm">Generate balanced vegetarian, non-vegetarian, or vegan Indian meal plans optimized for metabolic health.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-xl bg-[#F8DCE7] text-[#C45B82] flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-file-medical"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Doctor Visit Summaries</h3>
+                    <p class="text-gray-600 text-sm">Prepare for clinical consultations by generating organized symptom reports and targeted questions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DASHBOARD SECTION -->
+        <section id="view-dashboard" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">Hello, <span id="dashNameDisplay" class="text-[#C45B82]">User</span>! 👋</h2>
+                <p class="text-gray-600 text-sm mt-1">Welcome back to your personalized PCOS health dashboard.</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-4">
+                    <div class="p-4 rounded-xl bg-[#F8DCE7] text-[#C45B82] text-2xl"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Next Period Est.</p>
+                        <h4 id="dashNextPeriod" class="text-lg font-bold text-[#C45B82]">Not Logged</h4>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-4">
+                    <div class="p-4 rounded-xl bg-[#EAE4F5] text-[#C45B82] text-2xl"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Primary Goal</p>
+                        <h4 id="dashPrimaryGoal" class="text-lg font-bold text-[#C45B82]">General Wellness</h4>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-4">
+                    <div class="p-4 rounded-xl bg-[#F8DCE7] text-[#C45B82] text-2xl"><i class="fa-solid fa-face-smile"></i></div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Diagnosis Status</p>
+                        <h4 id="dashDiagnosisStatus" class="text-lg font-bold text-[#C45B82]">Exploring</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Grid -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8">
+                <h3 class="text-lg font-bold mb-4">Quick Health Actions</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <button onclick="switchView('symptom-checker')" class="p-4 rounded-xl bg-[#FFF9F5] hover:bg-[#F8DCE7] text-center transition border border-gray-100">
+                        <i class="fa-solid fa-clipboard-check text-[#C45B82] text-xl mb-2"></i>
+                        <p class="text-xs font-semibold">Check Symptoms</p>
+                    </button>
+                    <button onclick="switchView('period-tracker')" class="p-4 rounded-xl bg-[#FFF9F5] hover:bg-[#F8DCE7] text-center transition border border-gray-100">
+                        <i class="fa-solid fa-calendar-days text-[#C45B82] text-xl mb-2"></i>
+                        <p class="text-xs font-semibold">Track Period</p>
+                    </button>
+                    <button onclick="switchView('diet-planner')" class="p-4 rounded-xl bg-[#FFF9F5] hover:bg-[#F8DCE7] text-center transition border border-gray-100">
+                        <i class="fa-solid fa-utensils text-[#C45B82] text-xl mb-2"></i>
+                        <p class="text-xs font-semibold">Diet Planner</p>
+                    </button>
+                    <button onclick="switchView('doctor-prep')" class="p-4 rounded-xl bg-[#FFF9F5] hover:bg-[#F8DCE7] text-center transition border border-gray-100">
+                        <i class="fa-solid fa-user-doctor text-[#C45B82] text-xl mb-2"></i>
+                        <p class="text-xs font-semibold">Doctor Prep</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Analytics Chart -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="text-lg font-bold mb-4">Weekly Symptom Intensity Trend</h3>
+                <div class="h-64">
+                    <canvas id="dashboardChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SYMPTOM CHECKER SECTION -->
+        <section id="view-symptom-checker" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">Interactive Symptom Checker</h2>
+                <p class="text-gray-600 text-sm mt-1">Select the symptoms you have experienced over the last 3–6 months to receive tailored self-care suggestions.</p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
+                <form id="symptomAssessmentForm" onsubmit="handleSymptomSubmit(event)">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block font-semibold mb-3 text-[#C45B82]">1. Menstrual Irregularity & Flow</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Irregular or missed periods" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Irregular or missed periods</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Heavy menstrual bleeding" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Heavy menstrual bleeding</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold mb-3 text-[#C45B82]">2. Skin & Hair Changes</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Persistent acne or oily skin" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Persistent acne / oily skin</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Scalp hair thinning" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Scalp hair thinning</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Excess facial/body hair growth" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Excess facial/body hair growth</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold mb-3 text-[#C45B82]">3. Metabolic & Mood Indicators</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Unexplained weight gain" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Unexplained weight gain</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Frequent bloating & fatigue" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Frequent bloating & fatigue</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl border border-gray-200 hover:bg-pink-50 cursor-pointer">
+                                    <input type="checkbox" name="symptom" value="Mood changes or sleep disruption" class="w-4 h-4 text-[#C45B82]">
+                                    <span class="text-sm">Mood changes / sleep disruption</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full sm:w-auto">Analyze Symptoms</button>
+                    </div>
+                </form>
+
+                <!-- Results Output Box -->
+                <div id="symptomResultContainer" class="mt-8 hidden border-t border-gray-100 pt-6">
+                    <h3 class="text-xl font-bold mb-3 text-[#C45B82]">Assessment Summary</h3>
+                    <div id="symptomResultContent" class="space-y-4 text-gray-700"></div>
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mt-6 rounded-r-xl">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-500 text-xl"></i>
+                            <p class="text-xs sm:text-sm text-amber-800"><strong>Medical Disclaimer:</strong> Symptoms alone cannot confirm PCOS. Other underlying conditions can cause similar signs. Please consult a gynaecologist or endocrinologist for clinical evaluations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PERIOD TRACKER SECTION -->
+        <section id="view-period-tracker" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">Menstrual Cycle Tracker</h2>
+                <p class="text-gray-600 text-sm mt-1">Log your cycle dates and calculate estimated next period timelines.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-bold mb-4">Log Period Entry</h3>
+                    <form id="periodLogForm" onsubmit="handlePeriodSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Period Start Date</label>
+                            <input type="date" id="periodStartDate" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Period End Date</label>
+                            <input type="date" id="periodEndDate" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Average Cycle Length (Days)</label>
+                            <input type="number" id="periodCycleLength" value="28" min="20" max="60" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                        </div>
+                        <button type="submit" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full">Save Cycle Record</button>
+                    </form>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-bold mb-4">Cycle History & Estimates</h3>
+                    <div id="periodHistoryContainer" class="space-y-3 max-h-96 overflow-y-auto pr-2">
+                        <p class="text-gray-500 text-sm italic">No period records saved yet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CARE & SOLUTIONS SECTION -->
+        <section id="view-care-solutions" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">Personalized Care & Solutions</h2>
+                <p class="text-gray-600 text-sm mt-1">Select an area below to explore evidence-based guidance and self-care recommendations.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div onclick="openCareDetail('weight')" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-[#C45B82] cursor-pointer transition">
+                    <div class="w-12 h-12 rounded-xl bg-[#F8DCE7] text-[#C45B82] flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-weight-scale"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Weight & Metabolism</h3>
+                    <p class="text-gray-600 text-sm">Insulin sensitivity, balanced protein intake, and sustainable walking habits.</p>
+                </div>
+                <div onclick="openCareDetail('hair')" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-[#C45B82] cursor-pointer transition">
+                    <div class="w-12 h-12 rounded-xl bg-[#EAE4F5] text-[#C45B82] flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-scissors"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Hair Loss & Growth</h3>
+                    <p class="text-gray-600 text-sm">Androgen management, nutritional support, and gentle scalp care routines.</p>
+                </div>
+                <div onclick="openCareDetail('acne')" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-[#C45B82] cursor-pointer transition">
+                    <div class="w-12 h-12 rounded-xl bg-[#F8DCE7] text-[#C45B82] flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Acne & Skin Care</h3>
+                    <p class="text-gray-600 text-sm">Gentle skincare routines, low-glycemic foods, and breakout management.</p>
+                </div>
+            </div>
+
+            <div id="careDetailCard" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 hidden">
+                <h3 id="careDetailTitle" class="text-xl font-bold text-[#C45B82] mb-3"></h3>
+                <div id="careDetailBody" class="text-gray-700 space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- 6. DIET PLANNER SECTION -->
+        <section id="view-diet-planner" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">Indian PCOS Diet Planner</h2>
+                <p class="text-gray-600 text-sm mt-1">Generate balanced Indian meal plans tailored to your dietary preference.</p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 mb-8">
+                <div class="flex flex-col sm:flex-row gap-4 items-center">
+                    <div class="w-full sm:w-72">
+                        <label class="block text-sm font-semibold mb-1">Dietary Preference</label>
+                        <select id="dietPreferenceSelect" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]">
+                            <option value="veg">Vegetarian (Paneer, Dal, Curd)</option>
+                            <option value="nonveg">Non-Vegetarian (Eggs, Chicken, Fish)</option>
+                            <option value="vegan">Vegan (Plant-Based Options)</option>
+                        </select>
+                    </div>
+                    <div class="sm:self-end w-full sm:w-auto">
+                        <button onclick="generateMealPlan()" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full">Generate Meal Plan</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mealPlanResultGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center space-x-2 text-[#C45B82] font-bold mb-2"><i class="fa-solid fa-sun"></i><span>Breakfast</span></div>
+                    <p id="mealBreakfast" class="text-gray-700 text-sm"></p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center space-x-2 text-[#C45B82] font-bold mb-2"><i class="fa-solid fa-mug-hot"></i><span>Mid-Morning Snack</span></div>
+                    <p id="mealSnack" class="text-gray-700 text-sm"></p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center space-x-2 text-[#C45B82] font-bold mb-2"><i class="fa-solid fa-bowl-food"></i><span>Lunch</span></div>
+                    <p id="mealLunch" class="text-gray-700 text-sm"></p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center space-x-2 text-[#C45B82] font-bold mb-2"><i class="fa-solid fa-cookie-bite"></i><span>Evening Snack</span></div>
+                    <p id="mealEvening" class="text-gray-700 text-sm"></p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 sm:col-span-2">
+                    <div class="flex items-center space-x-2 text-[#C45B82] font-bold mb-2"><i class="fa-solid fa-moon"></i><span>Dinner</span></div>
+                    <p id="mealDinner" class="text-gray-700 text-sm"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. EXERCISE GUIDE SECTION -->
+        <section id="view-exercise-guide" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">Exercise & Yoga Guide</h2>
+                <p class="text-gray-600 text-sm mt-1">Low-impact workouts and yoga poses specifically beneficial for hormonal balance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-12 h-12 rounded-xl bg-[#F8DCE7] text-[#C45B82] flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-person-walking"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Brisk Walking</h3>
+                    <p class="text-xs text-gray-500 mb-2">Duration: 30–45 mins daily</p>
+                    <p class="text-gray-600 text-sm">Improves cardiovascular endurance and aids insulin sensitivity without overloading cortisol levels.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-12 h-12 rounded-xl bg-[#EAE4F5] text-[#C45B82] flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-spa"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Supta Baddha Konasana</h3>
+                    <p class="text-xs text-gray-500 mb-2">Duration: 10–15 mins</p>
+                    <p class="text-gray-600 text-sm">Reclining bound angle pose opens pelvic circulation, reduces cramps, and calms the nervous system.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-12 h-12 rounded-xl bg-[#F8DCE7] text-[#C45B82] flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-dumbbell"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Beginner Strength Training</h3>
+                    <p class="text-xs text-gray-500 mb-2">Duration: 20 mins (3x weekly)</p>
+                    <p class="text-gray-600 text-sm">Builds lean muscle mass to improve glucose uptake and metabolic rate.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. MYTH VS FACT QUIZ SECTION -->
+        <section id="view-quiz" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">PCOS Myth vs. Fact Quiz</h2>
+                <p class="text-gray-600 text-sm mt-1">Test your knowledge and learn evidence-based facts about PCOS.</p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
+                <div id="quizContainer">
+                    <h3 id="quizQuestionTitle" class="text-lg font-bold mb-4 text-[#C45B82]">Question 1</h3>
+                    <p id="quizQuestionText" class="text-gray-800 font-medium mb-6"></p>
+                    <div id="quizOptions" class="space-y-3 mb-6"></div>
+                    <div id="quizFeedback" class="p-4 rounded-xl mb-6 hidden"></div>
+                    <button id="quizNextBtn" onclick="nextQuizQuestion()" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full hidden">Next Question</button>
+                </div>
+                <div id="quizCompletion" class="text-center py-8 hidden">
+                    <i class="fa-solid fa-award text-5xl text-[#C45B82] mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2">Quiz Completed!</h3>
+                    <p id="quizScoreText" class="text-gray-600 mb-6"></p>
+                    <button onclick="restartQuiz()" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. DOCTOR VISIT PREP SECTION -->
+        <section id="view-doctor-prep" class="app-view hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold">Doctor Visit Preparation</h2>
+                <p class="text-gray-600 text-sm mt-1">Summarize your concerns and questions to print or save for your next medical appointment.</p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 max-w-3xl mx-auto">
+                <form id="docPrepForm" onsubmit="generateDocSummary(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Primary Reason for Visit</label>
+                        <input type="text" id="docReasonInput" placeholder="e.g., Irregular periods and facial hair growth for 6 months" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Specific Questions You Want to Ask</label>
+                        <textarea id="docQuestionsInput" rows="3" placeholder="e.g., Should I get an ultrasound or hormone blood tests done?" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]"></textarea>
+                    </div>
+                    <button type="submit" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full">Generate Printable Consultation Brief</button>
+                </form>
+
+                <div id="docSummaryOutput" class="mt-8 pt-6 border-t border-gray-100 hidden">
+                    <h3 class="text-xl font-bold mb-4 text-[#C45B82]">Consultation Summary</h3>
+                    <div id="docSummaryContent" class="space-y-3 bg-gray-50 p-6 rounded-xl border border-gray-200 text-sm text-gray-800"></div>
+                    <button onclick="window.print()" class="mt-4 bg-[#2D3748] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-gray-800 transition w-full"><i class="fa-solid fa-print mr-2"></i> Print Summary</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- AUTHENTICATION & ONBOARDING MODAL -->
+    <div id="authModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative shadow-xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            
+            <!-- Auth Tabs -->
+            <div id="authTabs" class="flex space-x-2 border-b border-gray-100 pb-4 mb-6">
+                <button id="tabLoginBtn" onclick="switchAuthTab('login')" class="flex-1 pb-2 font-bold text-center border-b-2 border-[#C45B82] text-[#C45B82]">Login</button>
+                <button id="tabRegisterBtn" onclick="switchAuthTab('register')" class="flex-1 pb-2 font-bold text-center border-b-2 border-transparent text-gray-400">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Email Address</label>
+                    <input type="email" id="loginEmail" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Password</label>
+                    <input type="password" id="loginPassword" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                </div>
+                <button type="submit" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full">Login</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Full Name</label>
+                    <input type="text" id="regName" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Email Address</label>
+                    <input type="email" id="regEmail" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Password</label>
+                    <input type="password" id="regPassword" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]" required>
+                </div>
+                <button type="submit" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full">Continue to Onboarding</button>
+            </form>
+
+            <!-- Onboarding Questionnaire (Shown after successful registration) -->
+            <div id="onboardingContainer" class="hidden space-y-4">
+                <h3 class="font-bold text-lg text-[#C45B82] mb-2">Personalized Onboarding</h3>
+                <p class="text-xs text-gray-500 mb-4">Help us tailor your health companion dashboard.</p>
+                <form id="onboardingForm" onsubmit="handleOnboardingSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Have you been diagnosed with PCOS?</label>
+                        <select id="onboardDiagnosed" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not sure">Not sure</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Main Health Concern</label>
+                        <select id="onboardConcern" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#C45B82]">
+                            <option value="Irregular periods">Irregular periods</option>
+                            <option value="Weight management">Weight management</option>
+                            <option value="Hair fall & acne">Hair fall & acne</option>
+                            <option value="General wellness">General wellness</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="bg-[#C45B82] text-white px-6 py-3 rounded-xl font-medium shadow hover:bg-[#a7466b] transition w-full">Complete Setup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-6 text-center text-xs text-gray-500">
+        <p>&copy; 2026 PCOS CARE • BE Computer Science College Project • Educational Platform Only</p>
+    </footer>
+
+    <!-- Main JavaScript Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

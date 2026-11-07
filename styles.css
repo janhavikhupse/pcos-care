@@ -1,0 +1,52 @@
+
+/* ==========================================================================
+   PCOS CARE - CUSTOM STYLESHEET
+   Color Palette:
+   - Pastel Pink:   #F8DCE7
+   - Cream White:   #FFF9F5
+   - Dark Pink:     #C45B82
+   - Soft Lavender: #EAE4F5
+   - White:         #FFFFFF
+   ========================================================================== */
+
+:root {
+    --bg-primary: #FFF9F5;
+    --primary-color: #C45B82;
+    --primary-hover: #a7466b;
+    --accent-pink: #F8DCE7;
+    --lavender: #EAE4F5;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: #2D3748;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Smooth transitions for view switching */
+.app-view {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.app-view.active-view {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Active Navigation styling */
+.nav-btn.active-nav {
+    color: var(--primary-color);
+    background-color: var(--accent-pink);
+    font-weight: 600;
+}
